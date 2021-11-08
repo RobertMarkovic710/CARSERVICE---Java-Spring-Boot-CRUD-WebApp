@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Service</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+Welcome to CarService - Home page.
+
+
+<h1>10 recent services:</h1>
+<ul class = "list-unstyled">
+    <div class="row mt-3">
+        <li class="mt-2" th:each="service : ${sortedServicesList}" >
+            <a th:href="@{'/service/info/' + *{service.id}}"><span th:text="${'MMAKE: ' + service.vehicle.carType.getManufacturer()  + ', MODEL: ' + service.vehicle.carType.getModel() + ', DESC: ' + service.workDescription + ', MECHANIC: ' + service.mechanicName + ', PRICE: ' + service.price + ', PAID: ' + service.paidOrNot + ', DATE&TIME: ' + service.date}">Service</span></a>
+        </li>
+    </div>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+<head>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Vehicle form</title>
+</head>
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container" style="margin-top: 2%;">
+  <h1>Registration - Vehicle</h1>
+  <br/>
+  <form class="form-group" action="/vehicle/create" method="post" th:object="${vehicle}">
+
+    <input type="hidden" th:field="*{id}"/>
+
+<!--    <div class="form-group">-->
+<!--      <label> Owner:</label>-->
+<!--      <input class="form-control" type="text" th:field="*{owner}"/>-->
+<!--      <br/><br/>-->
+<!--    </div>-->
+
+    <!--<div class="form-group">
+      <label> Vehicle:</label>
+      <input class="form-control" type="text" th:field="*{}"/>
+      <br/><br/>
+    </div>-->
+
+    <div class="form-group">
+      <label> Year:</label>
+      <input class="form-control" type="number" th:field="*{year}"/>
+      <br/><br/>
+    </div>
+
+    <div class="form-group">
+      <label> License plate:</label>
+      <input class="form-control" type="text" th:field="*{licensePlate}"/>
+      <br/><br/>
+    </div>
+
+    <div class="form-group">
+      <label> Paint:</label>
+      <input class="form-control" type="text" th:field="*{paint}"/>
+      <br/><br/>
+    </div>
+
+    <div class="row mt-3">
+      <label class="mr-2 block">Type: </label>
+      <select th:field="*{carType}">
+        <option th:each="carType : ${carTypes}"
+                th:value="${carType.name()}"
+                th:text="${carType.getManufacturer() + ' ' + carType.getModel()}">CarType</option>
+      </select>
+    </div>
+
+
+    <div class="row mt-3">
+      <label class="mr-2 block" for="client" > Asign car: </label>
+      <select id="client" name="client" th:with="client=*{client}">
+        <option th:each="client : ${clients}"
+                th:value="${client.id}"
+                th:text="${client.firstName + ' ' + client.lastName}">Users
+        </option>
+      </select>
+    </div>
+    <hr/>
+    <br/><br/>
+
+    <button type="submit" class="btn btn-info"> Submit</button>
+    <a href="/">
+      <button class="btn btn-info" type="button">Back</button>
+    </a>
+
+  </form>
+</div>
+
+</body>
+</html>

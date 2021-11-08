@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Service form</title>
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container" style="margin-top: 2%;">
+    <h1>Service input</h1>
+
+    <form class="form-group" action="/service/create" method="post" th:object="${service}">
+
+        <input type="hidden" th:field="*{id}"/>
+
+<!--        <div class="form-group">-->
+<!--            <label> Date:</label>-->
+<!--            <input class="form-control" type="date" th:field="*{date}"/>-->
+<!--            <br/><br/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label> Time:</label>-->
+<!--            <input class="form-control" type="time" th:field="*{time}"/>-->
+<!--            <br/><br/>-->
+<!--        </div>-->
+
+        <div class="form-group">
+            <label> Mechanic name:</label>
+            <input class="form-control" type="text" th:field="*{mechanicName}"/>
+            <br/><br/>
+        </div>
+
+        <div class="form-group">
+            <label> Description:</label>
+            <input class="form-control" type="text" th:field="*{workDescription}"/>
+            <br/><br/>
+        </div>
+
+        <div class="form-group">
+            <label> Price:</label>
+            <input class="form-control" type="number" th:field="*{price}"/>
+            <br/><br/>
+        </div>
+
+        <div class="form-group">
+            <label> Paid:</label>
+            <input class="form-control" type="checkbox" th:field="*{paidOrNot}"/>
+            <br/><br/>
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2 block">Vehicle: </label>
+            <select id="vehicle" name="vehicle" th:with="vehicle=*{vehicle}">
+                <option th:each="vehicle : ${vehicles}"
+                        th:value="${vehicle.id}"
+                        th:text="${vehicle.carType.getManufacturer() + ' ' + vehicle.carType.getModel() + ' ' + vehicle.licensePlate}">CarType</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-info"> Submit</button>
+
+        <a href="/">
+            <button class="btn btn-info" type="button">Back</button>
+        </a>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client info</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container mt-5">
+    <h1>Client info</h1>
+    <table>
+        <tr>
+            <td class="mr-2 bigblock">OIB: </td>
+            <td th:text="${client.oib}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">First name: </td>
+            <td th:text="${client.firstName}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">Last name: </td>
+            <td th:text="${client.lastName}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">E-mail: </td>
+            <td th:text="${client.e_mail}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">City: </td>
+            <td th:text="${client.address.city}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">Post number: </td>
+            <td th:text="${client.address.postNumber}"/>
+        </tr>
+
+        <tr>
+            <td class="mr-2 bigblock">Country: </td>
+            <td th:text="${client.address.country}"/>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <ul class="list-unstyled">
+                    <li th:each="vehicle : ${client.carList}"><a th:href="@{'/vehicle/info/' + ${vehicle.id}}" th:text="${vehicle.carType.getManufacturer() + ' ' + vehicle.carType.getModel()}"></a>
+                        <a th:href="@{'/vehicle/edit/' + ${vehicle.id}}" class="btn btn-lg btn-outline-dark">Edit</a>
+                        <a th:href="@{'/vehicle/delete/' + ${vehicle.id}}" class="btn btn-lg btn-outline-dark">Delete</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+    </table>
+    <a th:href="@{'/vehicle/create/'}" class="btn btn-lg btn-outline-dark">Add vehicle</a><br/>
+</div>
+</body>
+</html>
